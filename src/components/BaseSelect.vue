@@ -1,9 +1,10 @@
 <script setup>
-import BaseButton from '@/components/BaseButton.vue'
-import { validateSelectOptions } from '@/Validators'
+import BaseButton from './BaseButton.vue'
+import { validateSelectOptions, isUndefinedOrNull, isNumberOrNull } from '@/Validators'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
+import { computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   options: {
     type: Object,
     validator: validateSelectOptions
@@ -15,15 +16,27 @@ defineProps({
     type: Number
   }
 })
+
+const emit = defineEmits({
+  select(value) {
+    return isNumberOrNull
+  }
+})
+const isNotSelected = computed(() => {
+  return isUndefinedOrNull(props.selected)
+})
 </script>
 
 <template>
   <div class="flex gap-2">
-    <BaseButton>
+    <BaseButton @click="emit('select', null)">
       <XMarkIcon class="h-8" />
     </BaseButton>
-    <select class="w-full truncate rounded bg-gray-100 py-1 px-2 text-2xl cursor-pointer">
-      <option selected disabled value="">{{ placeholder }}</option>
+    <select
+      class="w-full truncate rounded bg-gray-100 py-1 px-2 text-2xl cursor-pointer"
+      @change="emit('select', +$event.target.value)"
+    >
+      <option :selected="isNotSelected" disabled value="">{{ placeholder }}</option>
       <option
         v-for="{ value, label } in options"
         :key="value"
