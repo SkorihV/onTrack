@@ -13,6 +13,8 @@ const currentPage = ref(normalizePageHash())
 const timelineItems = generateTimelineItems()
 function goTo(page) {
   currentPage.value = page
+
+  
 }
 </script>
 
