@@ -1,4 +1,4 @@
-import { fileURLToPath, URL } from 'url'
+import { fileURLToPath } from 'url'
 
 import { defineConfig } from 'vite'
 import path from 'path'

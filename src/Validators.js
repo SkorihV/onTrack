@@ -1,4 +1,4 @@
-import { HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from '@/constants'
+import { BUTTON_TYPES, HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from '@/constants'
 
 export function isUndefinedOrNull(value) {
   return isUndefined(value) || isNull(value)
@@ -12,11 +12,27 @@ export function isPageValid(page) {
   return Object.keys(NAV_ITEMS).includes(page)
 }
 
+export function isButtonTypeValid(type) {
+  return BUTTON_TYPES.includes(type)
+}
+
 export function validateTimelineItems(timelineItems) {
   return timelineItems.every(isTimelineItemValid)
 }
 export function isTimelineItemValid({ hour }) {
   return isHourValid(hour)
+}
+
+export function validateActivities(activities) {
+  return activities.every(isActivityValid)
+}
+
+export function isActivityValid(activity) {
+  return isNotEmptyString(activity)
+}
+
+function isNotEmptyString(value) {
+  return isString(value) && value.length > 0
 }
 
 export function isHourValid(hour) {
