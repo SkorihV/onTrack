@@ -1,6 +1,8 @@
 <script>
 import { BUTTON_TYPE_DANGER, BUTTON_TYPE_NEUTRAL, BUTTON_TYPE_PRIMARY } from '@/constants'
 
+import { normalizeSelectValue } from '@/functions'
+
 const typeClasses = {
   [BUTTON_TYPE_PRIMARY]: 'bg-purple-500  enabled:hover:bg-purple-600 text-white',
   [BUTTON_TYPE_DANGER]: 'bg-red-500  enabled:hover:bg-red-600 text-white',

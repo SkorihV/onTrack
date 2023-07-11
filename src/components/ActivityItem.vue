@@ -18,7 +18,7 @@ defineProps({
   }
 })
 
-const secondToComplete = ref(null)
+const secondToComplete = ref(0)
 </script>
 
 <template>

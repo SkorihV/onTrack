@@ -8,11 +8,10 @@ import {
   generateTimelineItems,
   normalizePageHash,
   generateActivitySelectOptions,
-  generateActivities,
-  id
+  generateActivities
 } from '@/functions'
 import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const currentPage = ref(normalizePageHash())
 
@@ -20,7 +19,7 @@ const timelineItems = generateTimelineItems()
 
 const activities = ref(generateActivities())
 
-const activitySelectOptions = generateActivitySelectOptions(activities.value)
+const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value))
 
 function goTo(page) {
   currentPage.value = page
@@ -29,12 +28,8 @@ function goTo(page) {
 function deleteActivity(activity) {
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
-function createActivity(name) {
-  activities.value.push({
-    id: id(),
-    name,
-    secondsToComplete: 0
-  })
+function createActivity(activity) {
+  activities.value.push(activity)
 }
 </script>
 
