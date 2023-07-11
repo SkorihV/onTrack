@@ -4,12 +4,16 @@ import BaseButton from '@/components/BaseButton.vue'
 import BaseSelect from '@/components/BaseSelect.vue'
 import { ref } from 'vue'
 import { PERIOD_SELECT_OPTIONS, BUTTON_TYPE_DANGER } from '@/constants'
-import { isActivityValid } from '@/Validators'
+import { isActivityValid, isUndefined } from '@/Validators'
+
+const emit = defineEmits({
+  delete: isUndefined
+})
 
 defineProps({
   activity: {
     required: true,
-    type: String,
+    type: Object,
     validator: isActivityValid
   }
 })
@@ -20,10 +24,10 @@ const secondToComplete = ref(null)
 <template>
   <li class="flex flex-col gap-2 p-4">
     <div class="flex items-center gap-2">
-      <BaseButton :type="BUTTON_TYPE_DANGER">
+      <BaseButton :type="BUTTON_TYPE_DANGER" @click="emit('delete')">
         <TrashIcon class="h-8" />
       </BaseButton>
-      <span class="truncate text-xl">{{ activity }}</span>
+      <span class="truncate text-xl">{{ activity.name }}</span>
     </div>
     <div>
       <BaseSelect
